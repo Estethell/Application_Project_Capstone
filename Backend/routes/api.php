@@ -14,5 +14,7 @@ Route::name('api.v1.')
 ->group(function () {
     Route::get('/jobOffer', [JobOfferController::class,'index'])->name('jobOffer.index'); 
     Route::get('/jobOffer/{id}', [JobOfferController::class,'show'])->name('jobOffer.show'); 
+    Route::post('/jobOffer/{jobOffer}/assignSteps', [JobOfferController::class, 'assignSteps'])->name('jobOffer.assignSteps');
+
 
 });

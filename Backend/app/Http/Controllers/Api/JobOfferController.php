@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 use App\Models\Job_offer;
+use App\Models\Step;
 use App\Http\Requests\StoreJob_offerRequest;
 use App\Http\Requests\UpdateJob_offerRequest;
 
@@ -13,10 +14,10 @@ class JobOfferController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $jobOffers = Job_offer::with('steps')->get();
+{
+    $jobOffers = Job_offer::with('steps')->get();
     return response()->json($jobOffers);
-    }
+}
 
     /**
      * Show the form for creating a new resource.
@@ -49,6 +50,32 @@ class JobOfferController extends Controller
     'data' => $jobOffer
         ];
         }
+
+        
+        public function assignSteps( $request, $jobOfferId)
+    {
+        $jobOffer = Job_offer::findOrFail($jobOfferId);
+        $stepIds = $request->input('step_ids'); 
+
+        
+        if (!is_array($stepIds)) {
+            return response()->json(['error' => 'step_ids deve essere un array'], 400);
+        }
+
+       
+        $steps = Step::whereIn('id', $stepIds)->get();
+        if (count($steps) != count($stepIds)) {
+            return response()->json(['error' => 'Uno o più steps non esistono'], 400);
+        }
+
+       
+        $jobOffer->steps()->attach($stepIds);
+
+        return response()->json([
+            'message' => 'Steps assegnati con successo',
+            'job_offer' => $jobOffer->load('steps')
+        ], 200);
+    }
 
     /**
      * Show the form for editing the specified resource.
