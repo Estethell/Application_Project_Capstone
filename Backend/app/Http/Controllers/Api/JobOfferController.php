@@ -14,7 +14,8 @@ class JobOfferController extends Controller
      */
     public function index()
     {
-        //
+        $jobOffers = Job_offer::with('steps')->get();
+    return response()->json($jobOffers);
     }
 
     /**
@@ -36,10 +37,18 @@ class JobOfferController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Job_offer $job_offer)
+    public function show($id)
     {
-        //
+        $jobOffer = Job_offer::with('step')->find($id);
+        if ($jobOffer) {
+            return response(['message'=> 'Nessuna offerta di lavoro disponibile'], 404);
+
     }
+
+     return [
+    'data' => $jobOffer
+        ];
+        }
 
     /**
      * Show the form for editing the specified resource.

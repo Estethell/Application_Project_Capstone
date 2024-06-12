@@ -16,9 +16,9 @@ class Job_offer extends Model
         return $this->hasMany(Candidate::class);
     }
 
-    public function step(): BelongsToMany
+    public function steps(): BelongsToMany
     {
-        return $this->belongsToMany(Step::class, 'job_step');
+        return $this->belongsToMany(Step::class, 'job_step', 'job_offer_id', 'step_id');
     }
 
 }

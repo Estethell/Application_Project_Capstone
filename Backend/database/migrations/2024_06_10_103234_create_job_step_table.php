@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('job_step', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('job_offers_id')->constrained();
-            $table->foreignId('steps_id')->constrained();
+            $table->foreignId('job_offer_id')->constrained();
+            $table->foreignId('step_id')->constrained();
             $table->timestamps();
         });
     }
