@@ -1,0 +1,45 @@
+.myNav {
+  height: 3.5em;
+}
+
+.hero {
+  background-image: url("https://images.pexels.com/photos/4050320/pexels-photo-4050320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-position: center;
+  height: 40vh;
+  width: 100%;
+}
+
+.miniDivHero {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.footerCol {
+  font-size: 0.8em;
+  margin-top: 2em;
+}
+
+.footerBold {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#dropdown-basic {
+  padding-right: 7em;
+}
+
+.footerLink {
+  text-decoration: none;
+  color: black;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+  color: rgb(40, 131, 222);
+}
+
+/* .candidateList,
+.detailCandidate {
+  background-color: rgba(255, 255, 255);
+  border-radius: 1.5em;
+} */
