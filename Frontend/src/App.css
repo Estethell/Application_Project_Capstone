@@ -1,4 +1,5 @@
 .myNav {
+  background-color: rgba(255, 255, 255, 0.5);
   height: 3.5em;
 }
 
@@ -7,7 +8,6 @@
   background-size: cover;
   background-position: center;
   height: 40vh;
-  width: 100%;
 }
 
 .miniDivHero {
@@ -37,9 +37,3 @@
   text-decoration: underline;
   color: rgb(40, 131, 222);
 }
-
-/* .candidateList,
-.detailCandidate {
-  background-color: rgba(255, 255, 255);
-  border-radius: 1.5em;
-} */

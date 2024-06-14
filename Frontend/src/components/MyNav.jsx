@@ -5,7 +5,7 @@ function MyNav() {
     <Nav
       activeKey="/home"
       onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      className="myNav bg-info text-white d-flex align-items-center"
+      className="myNav text-white d-flex align-items-center"
     >
       <Nav.Item>
         <Nav.Link href="/home">Home</Nav.Link>

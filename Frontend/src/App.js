@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import MyNav from "./components/MyNav";
 import JobOffer from "./components/JobOffer";
@@ -10,9 +10,11 @@ function App() {
   return (
     <BrowserRouter>
       <MyNav />
-      {/* <JobOffer /> */}
-      {/* <ClientForm /> */}
-      <Candidate />
+      <Routes>
+        <Route path="/" element={<JobOffer />}></Route>
+        {/* <ClientForm /> */}
+        {/* <Candidate /> */}
+      </Routes>
       <Footer />
     </BrowserRouter>
   );
