@@ -1,28 +1,89 @@
-import Nav from "react-bootstrap/Nav";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { LOGOUT } from "../redux/actions";
 
-function MyNav() {
+const TopNav = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user);
+
+  const logout = () => {
+    axios
+      .post("/logout")
+      .then(() => dispatch({ type: LOGOUT }))
+      .then(() => navigate("/login"));
+  };
+
   return (
-    <Nav
-      activeKey="/home"
-      onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      className="myNav text-white d-flex align-items-center"
-    >
-      <Nav.Item>
-        <Nav.Link href="/home">Home</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="link-1">Link</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="link-2">Link</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="disabled" disabled>
-          Disabled
-        </Nav.Link>
-      </Nav.Item>
-    </Nav>
-  );
-}
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">
+          P.U.
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            {user?.role === "student" && (
+              <li className="nav-item">
+                <Link className="nav-link active" to="/transcript">
+                  Transcript
+                </Link>
+              </li>
+            )}
 
-export default MyNav;
+            <li className="nav-item dropdown">
+              <Link className="nav-link dropdown-toggle" to="/" data-bs-toggle="dropdown">
+                Dropdown
+              </Link>
+              <ul className="dropdown-menu">
+                <li>
+                  <Link className="dropdown-item" to="/">
+                    Action
+                  </Link>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/">
+                    Something else here
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          {user ? (
+            <>
+              <span className="me-2">{user.name}</span>
+              <img className="me-2" src={user.profile_img} alt="" style={{ height: "50px", width: "50px" }} />
+              <button className="btn btn-primary" onClick={logout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link className="btn btn-primary me-2" to="/login">
+                Login
+              </Link>
+              <Link className="btn btn-primary" to="/register">
+                Register
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default TopNav;

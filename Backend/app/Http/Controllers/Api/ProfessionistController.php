@@ -14,7 +14,8 @@ class ProfessionistController extends Controller
      */
     public function index()
     {
-        //
+        $professionists =  Professionist::all()->get();
+        return response()->json($professionists);
     }
 
     /**
