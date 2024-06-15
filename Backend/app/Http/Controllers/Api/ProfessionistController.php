@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
+
 use App\Models\professionist;
 use App\Http\Requests\StoreprofessionistRequest;
 use App\Http\Requests\UpdateprofessionistRequest;
+use App\Http\Service\ProfessionistService;
 
 class ProfessionistController extends Controller
 {
@@ -14,7 +16,7 @@ class ProfessionistController extends Controller
      */
     public function index()
     {
-        $professionists =  Professionist::all()->get();
+        $professionists =  Professionist::all();
         return response()->json($professionists);
     }
 
@@ -23,7 +25,7 @@ class ProfessionistController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -31,7 +33,8 @@ class ProfessionistController extends Controller
      */
     public function store(StoreprofessionistRequest $request)
     {
-        //
+        $professionist = ProfessionistService::professionistPost($request);
+    return response()->json($professionist);
     }
 
     /**

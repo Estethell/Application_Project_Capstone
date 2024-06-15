@@ -11,6 +11,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 
+
+
 Route::name('api.v1.')
 ->prefix('v1')
 ->group(function () {
@@ -18,7 +20,7 @@ Route::name('api.v1.')
     Route::get('/jobOffer/{id}', [JobOfferController::class,'show'])->name('jobOffer.show'); 
     Route::post('/jobOffer/{jobOffer}/assignSteps', [JobOfferController::class, 'assignSteps'])->name('jobOffer.assignSteps');
     Route::get('/candidate', [CandidateController::class,'index'])->name('candidate.index'); 
-    Route::get('/professionist', [ProfessionistController::class,'index'])->name('professionist.index'); 
+    Route::post('/professionist', [ProfessionistController::class,'store'])->name('professionist.store'); 
 
 
 });

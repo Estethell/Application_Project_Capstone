@@ -20,7 +20,7 @@ const TopNav = () => {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          P.U.
+          EnjoyJob
         </Link>
         <button
           className="navbar-toggler"
@@ -76,7 +76,7 @@ const TopNav = () => {
                 Login
               </Link>
               <Link className="btn btn-primary" to="/register">
-                Register
+                Registrati
               </Link>
             </>
           )}

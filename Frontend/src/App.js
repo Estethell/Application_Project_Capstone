@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 function App() {
   axios.defaults.withCredentials = true;
   axios.defaults.withXSRFToken = true;
+  axios.defaults.baseURL = "http://localhost:8000";
 
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
@@ -36,12 +37,13 @@ function App() {
   return (
     <BrowserRouter>
       <MyNav />
-      <Routes>
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/" element={<JobOffer />}></Route>
 
-          {/* <ClientForm /> */}
+      <Routes>
+        <Route path="/" element={<JobOffer />}></Route>
+
+        <Route element={<ProtectedRoutes />}>
           {/* <Candidate /> */}
+          <Route path="/clientForm" element={<ClientForm />}></Route>
         </Route>
         <Route element={<GuestRoutes />}>
           <Route path="/login" element={<Login />} />

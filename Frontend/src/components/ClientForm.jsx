@@ -8,6 +8,8 @@ const Form = () => {
     cv: null,
   });
 
+  const [form, setForm] = useState([]);
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData((prevFormData) => ({
@@ -19,11 +21,25 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    fetch("http://localhost:8000/api/v1/professionist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nome: "name",
+        cognome: "surname",
+        email: "email",
+        cv: "cv",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => setForm(data));
   };
 
   return (
-    <div className="container w-50 mt-5 bg-body-tertiary">
+    <div className="container w-50 mt-5">
+      <h1 className="d-flex justify-content-center my-4">Candidati</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group my-4">
           <label htmlFor="name">Nome:</label>
