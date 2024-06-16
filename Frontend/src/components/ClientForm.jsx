@@ -21,10 +21,28 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // fetch("http://localhost:8000/api/v1/professionist", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+
+    //   },
+    //   body: JSON.stringify({
+    //     nome: "name",
+    //     cognome: "surname",
+    //     email: "email",
+    //     cv: "cv",
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => setForm(data));
+
     fetch("http://localhost:8000/api/v1/professionist", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // "Set-Cookie":
+        //   "XSRF-TOKEN=eyJpdiI6ImRRNVlPM3lORzh2WGxlYXVRbGVXTlE9PSIsInZhbHVlIjoiVVU3Z1ppVm92dWxqRGJMZXRnalNiWDg5UEhoNkZ0aWFXaExnK2VEVE15NHdQQTdtU3Z6VWNQYjFGdnNBSDc5dW9McmdpQnNXZnZTTWpwMmRrVTI5MGMzZk1tUXFlTHlHaWkxTmtmR1pkWmZuWUtPTnVPVk9NSnpOUlhaQlVBOXkiLCJtYWMiOiJjMGFmZTNlYmQ2MGNhNDU2YjQ2Y2IzYTE2MjRjMWM2YTQ0ZGIzMTkwZGFhMzJiY2MxMDIzMGRjMDQ3ZTJjOTcyIiwidGFnIjoiIn0%3D; expires=Sun, 16 Jun 2024 16:11:57 GMT; Max-Age=7200; path=/; samesite=lax",
       },
       body: JSON.stringify({
         nome: "name",

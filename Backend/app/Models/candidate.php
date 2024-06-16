@@ -16,10 +16,7 @@ class Candidate extends Model
         return $this->belongsTo(Job_Offer::class);
     }
 
-    public function event(): HasMany
-    {
-        return $this->hasMany(Event::class);
-    }
+    
 
     public function professionist(): BelongsTo
     {

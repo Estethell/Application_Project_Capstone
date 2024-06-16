@@ -23,7 +23,7 @@ class VerifyCsrfToken extends Middleware
     public function __construct()
     {
         $this->except = [
-            'api/v1/professionist',
+            
         ];
     }
 
