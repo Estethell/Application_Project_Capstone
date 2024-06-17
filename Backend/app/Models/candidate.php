@@ -18,13 +18,22 @@ class Candidate extends Model
 
     
 
-    public function professionist(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Professionist::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function step(): HasMany
+    public function cv(): BelongsTo
     {
-        return $this->hasMany(Step::class);
+        return $this->belongsTo(Cv::class);
+    }
+
+    public function step(): BelongsTo
+    {
+        return $this->belongsTo(Step::class);
+    }
+    public function event(): HasMany
+    {
+        return $this->hasMany(Event::class);
     }
 }

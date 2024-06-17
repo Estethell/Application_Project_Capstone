@@ -19,10 +19,12 @@ class DatabaseSeeder extends Seeder
         StepSeeder::class,
         JobOfferSeeder::class,
         ProfessionistSeeder::class,
-        CandidateSeeder::class,
-        EventSeeder::class,
         CvSeeder::class,
+        EventSeeder::class,
         UserSeeder::class,
+        CandidateSeeder::class,
+        
+        
        ]);
     }
 }

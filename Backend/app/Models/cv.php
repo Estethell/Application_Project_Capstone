@@ -10,8 +10,8 @@ class Cv extends Model
 {
     use HasFactory;
 
-    public function professionist(): BelongsTo
+    public function candidate(): BelongsTo
     {
-        return $this->belongsTo(Professionist::class);
+        return $this->belongsTo(Candidate::class);
     }
 }

@@ -27,11 +27,11 @@ class ProfessionistService
             // return $professionist;
 
 
-            $professionist = Professionist::create($professionist);
-            $candidate = Candidate::create([
-                ... $candidate,
-                'id_professionist'=> $professionist['id']
-            ]);
+            // $professionist = Professionist::create($professionist);
+            // $candidate = Candidate::create([
+            //     ... $candidate,
+            //     'professionists_id'=> $professionist['id']
+            // ]);
 
     }
 }

@@ -16,9 +16,9 @@ class ProfessionistController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $professionists =  Professionist::all();
-        return response()->json($professionists);
+    // {
+    //     $professionists =  Professionist::all();
+    //     return response()->json($professionists);
     }
 
     /**
@@ -34,32 +34,36 @@ class ProfessionistController extends Controller
      */
     public function store(StoreprofessionistRequest $request)
     {
-        if($request === null) {
-            $validateData = $request->validate([
-                'name'=>'required',
-                'email'=>'required | email',
-                'surname'=>'required',
-                'id_job'=>'required',
-                'id_step'=>'required'
-            ]);
-
-            $professionist = Professionist::create([
+      
+        // if($request === null) {
+            // $validateData = $request->validate([
+            //     'name'=>'required',
+            //     'email'=>'required | email',
+            //     'surname'=>'required',
+                // 'job_offers_id'=>'required',
+                // 'steps_id'=>'required'
                 
-                    'name'=>$validateData['name'],
-                    'email'=>$validateData['email'],
-                    'surname'=>$validateData['surname'],
+            // ]);
+            // error_log('ciao');
+            
+
+            // $professionist = Professionist::create([
+                
+            //         'name'=>$validateData['name'],
+            //         'email'=>$validateData['email'],
+            //         'surname'=>$validateData['surname'],
                     
-            ]);
+            // ]);
 
-            $candidate = Candidate::create([
-                'id_job'=>$validateData['id_job'],
-                'id_step'=>$validateData['id_step']
-            ]);
+            // $candidate = Candidate::create([
+            //     'job_offers_id'=>$validateData['job_offers_id'],
+            //     'steps_id'=>$validateData['steps_id']
+            // ]);
 
-            $professionist = ProfessionistService::professionistPost($professionist, $candidate);
-        }
+            // $professionist = ProfessionistService::professionistPost($professionist, $candidate);
+        // }
        
-    return response()->json($professionist);
+    // return response()->json($professionist);
     }
 
     /**
