@@ -14,7 +14,7 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $candidates =  Candidate::with('steps', 'job_offers', 'professionists')->get();
+        $candidates = Candidate::all();
         return response()->json($candidates);
     }
 

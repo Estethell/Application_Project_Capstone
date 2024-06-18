@@ -8,10 +8,12 @@
   background-size: cover;
   background-position: center;
   height: 40vh;
+  border-radius: 16px;
 }
 
 .miniDivHero {
   background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
 }
 
 .footerCol {
@@ -37,3 +39,163 @@
   text-decoration: underline;
   color: rgb(40, 131, 222);
 }
+
+/* Inizio cards job_offer */
+.card {
+  /* width: 350px;
+  height: 160px; */
+  background: #f7f9f9;
+  /* padding: 10px; */
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  background-color: #cde8f3;
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  color: rgb(58, 105, 167);
+  font-size: larger;
+}
+
+.card__title {
+  font-size: 1.4em;
+  font-weight: 800;
+}
+
+.card__text {
+  font-weight: 500;
+}
+
+.card__button {
+  cursor: pointer;
+  background-color: rgb(100, 153, 233);
+  color: #f7f9f9;
+  font-size: 1.15em;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 15px;
+}
+
+.card__button:hover {
+  background-color: #0762eb;
+}
+/* fine cards job_offer */
+
+/* inizio form register/login */
+.form {
+  gap: 10px;
+  max-width: 350px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  /* position: relative; */
+}
+
+.title {
+  font-size: 50px;
+  color: royalblue;
+  font-weight: 600;
+  letter-spacing: -1px;
+  /* position: relative; */
+  /* display: flex; */
+  text-align: center;
+  align-items: center;
+  /* padding-left: 30px; */
+}
+
+.message,
+.signin {
+  color: rgba(88, 87, 87, 0.822);
+  font-size: 14px;
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a {
+  color: royalblue;
+}
+
+.signin a:hover {
+  text-decoration: underline royalblue;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  gap: 6px;
+}
+
+.form label {
+  position: relative;
+  width: 100%;
+}
+
+.form label .input {
+  width: 100%;
+  padding: 10px 10px 20px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+}
+
+.form label .input + span {
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  color: grey;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span {
+  top: 15px;
+  font-size: 0.9em;
+}
+
+.form label .input:focus + span,
+.form label .input:valid + span {
+  top: 30px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.form label .input:valid + span {
+  color: green;
+}
+
+.submit {
+  border: none;
+  outline: none;
+  background-color: royalblue;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: 0.3s ease;
+}
+
+.submit:hover {
+  background-color: rgb(56, 90, 194);
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* fine form register/login */

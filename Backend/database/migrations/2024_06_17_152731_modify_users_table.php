@@ -15,6 +15,7 @@ return new class extends Migration
         // Aggiungi le nuove colonne
         $table->string('surname')->nullable()->after('name');
         $table->string('role', 20)->nullable()->after('email');
+        $table->string('cv')->nullable()->after('role');
     });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
             
             $table->dropColumn('surname');
             $table->dropColumn('role');
+            $table->dropColumn('cv');
         });
     }
 };

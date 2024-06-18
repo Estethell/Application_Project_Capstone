@@ -18,8 +18,7 @@ class DatabaseSeeder extends Seeder
        $this->call([
         StepSeeder::class,
         JobOfferSeeder::class,
-        ProfessionistSeeder::class,
-        CvSeeder::class,
+        // ProfessionistSeeder::class,
         EventSeeder::class,
         UserSeeder::class,
         CandidateSeeder::class,

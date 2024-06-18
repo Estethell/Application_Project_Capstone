@@ -1,11 +1,13 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const JobOffertsList = () => {
   const [jobOffer, setJobOffer] = useState([]);
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/jobOffer")
@@ -15,26 +17,25 @@ const JobOffertsList = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    navigate("/ClientForm");
+
+    if (!user || user.role !== "user") {
+      navigate("/register");
+    } else {
+      navigate("/");
+    }
   };
 
   return (
     <>
       {jobOffer.map((jobOffer) => {
         return (
-          <Card className="m-2 my-4" style={{ width: "540px", height: "250px" }} key={jobOffer.id}>
-            <Card.Header className="fs-4 bg-white">{jobOffer.name}</Card.Header>
-            <Card.Body className="d-flex flex-column justify-content-between">
-              <div>
-                <Card.Text>{jobOffer.description}</Card.Text>
-              </div>
-              <Card.Footer className="bg-white d-flex justify-content-end">
-                <Button onClick={handleClick} variant="primary" className="mt-2">
-                  Candidati
-                </Button>
-              </Card.Footer>
-            </Card.Body>
-          </Card>
+          <div className="card m-2 px-5 my-4" key={jobOffer.id} style={{ width: "540px", height: "250px" }}>
+            <span className="card__title">{jobOffer.name}</span>
+            <p className="card__text">{jobOffer.description}</p>
+            <button className="card__button" onClick={handleClick}>
+              Candidati
+            </button>
+          </div>
         );
       })}
     </>

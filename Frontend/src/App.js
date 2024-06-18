@@ -43,7 +43,7 @@ function App() {
 
         <Route element={<ProtectedRoutes />}>
           {/* <Candidate /> */}
-          <Route path="/clientForm" element={<ClientForm />}></Route>
+          {/* <Route path="/clientForm" element={<ClientForm />}></Route> */}
         </Route>
         <Route element={<GuestRoutes />}>
           <Route path="/login" element={<Login />} />

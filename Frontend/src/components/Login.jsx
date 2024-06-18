@@ -3,14 +3,23 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { LOGIN } from "../redux/actions";
 import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Form } from "react-bootstrap";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    navigate("/register");
+  };
 
   const updateInputValue = (ev) => {
     setFormData((oldFormData) => ({
@@ -21,7 +30,6 @@ const Login = () => {
 
   const submitLogin = async (ev) => {
     ev.preventDefault();
-    debugger;
 
     axios
       .get("/sanctum/csrf-cookie")
@@ -39,8 +47,46 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <form onSubmit={(ev) => submitLogin(ev)} noValidate>
+    <Container className="d-flex flex-column align-items-center">
+      <Form className="form" onSubmit={(ev) => submitLogin(ev)} noValidate>
+        <p className="title">Login </p>
+        <p className="message">Accedi per scoprire nuove opportunità lavorative </p>
+
+        <label className="my-1">
+          <span>Email</span>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            name="email"
+            onChange={(ev) => updateInputValue(ev)}
+            value={formData.email}
+          />
+        </label>
+
+        <label className="my-1">
+          <span>Password</span>
+
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            name="password"
+            onChange={(ev) => updateInputValue(ev)}
+            value={formData.password}
+          />
+        </label>
+
+        <button className="submit my-3">Accedi</button>
+        <p className="signin">
+          Non hai un account?{" "}
+          <button className="submit" onClick={handleClick}>
+            Registrati
+          </button>{" "}
+        </p>
+      </Form>
+
+      {/* <form onSubmit={(ev) => submitLogin(ev)} noValidate>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
             Email:
@@ -71,7 +117,7 @@ const Login = () => {
         <button type="submit" className="btn btn-primary">
           Effettua il Login
         </button>
-      </form>
+      </form> */}
     </Container>
   );
 };

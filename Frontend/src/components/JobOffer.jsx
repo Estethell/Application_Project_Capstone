@@ -4,8 +4,8 @@ import JobOffertsList from "./JobOffertsList";
 const JobOffer = () => {
   return (
     <Container fluid className="bg-body-tertiary">
-      <Row className="d-flex justify-content-center divRow">
-        <Col lg={11} className="pe-5 hero d-flex flex-column align-items-end justify-content-center">
+      <Row className="d-flex justify-content-center ">
+        <Col lg={11} className="pe-5 hero d-flex flex-column align-items-end justify-content-center ">
           <div className="miniDivHero">
             <h2 className=" p-3 m-2 pb-0 text-center">
               Trova il lavoro giusto per te
