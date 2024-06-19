@@ -2,44 +2,54 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
-const JobOffertsList = () => {
-  const [jobOffer, setJobOffer] = useState([]);
+const JobOffersList = () => {
+  const [jobOffers, setJobOffers] = useState([]);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const params = useParams();
 
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/jobOffer")
       .then((response) => response.json())
-      .then((data) => setJobOffer(data));
+      .then((data) => setJobOffers(data));
   }, []);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-
+  const handleClick = (jobOfferId) => {
     if (!user || user.role !== "user") {
       navigate("/register");
-    } else {
-      navigate("/");
+      return;
     }
+
+    axios
+      .post("http://localhost:8000/api/v1/candidate", {
+        jobOfferId,
+        userId: user.id,
+      })
+      .then((response) => {
+        console.log("Candidatura inviata:", response.data);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Errore nel processo di candidatura:", error);
+      });
   };
 
   return (
     <>
-      {jobOffer.map((jobOffer) => {
-        return (
-          <div className="card m-2 px-5 my-4" key={jobOffer.id} style={{ width: "540px", height: "250px" }}>
-            <span className="card__title">{jobOffer.name}</span>
-            <p className="card__text">{jobOffer.description}</p>
-            <button className="card__button" onClick={handleClick}>
-              Candidati
-            </button>
-          </div>
-        );
-      })}
+      {jobOffers.map((jobOffer) => (
+        <div className="card m-2 px-5 my-4" key={jobOffer.id} style={{ width: "540px", height: "250px" }}>
+          <span className="card__title">{jobOffer.name}</span>
+          <p className="card__text">{jobOffer.description}</p>
+          <button className="card__button" onClick={() => handleClick(jobOffer.id)}>
+            Candidati
+          </button>
+        </div>
+      ))}
     </>
   );
 };
 
-export default JobOffertsList;
+export default JobOffersList;

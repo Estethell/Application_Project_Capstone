@@ -1,5 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import JobOffertsList from "./JobOffertsList";
+import { useEffect } from "react";
+import axios from "axios";
 
 const JobOffer = () => {
   return (

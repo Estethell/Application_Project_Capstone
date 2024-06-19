@@ -21,9 +21,12 @@ class CandidateController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($candidate)
     {
-        //
+        $candidate = Candidate::create([
+
+
+        ]);
     }
 
     /**

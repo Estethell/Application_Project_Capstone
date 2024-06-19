@@ -21,6 +21,7 @@ Route::name('api.v1.')
     Route::post('/jobOffer/{jobOffer}/assignSteps', [JobOfferController::class, 'assignSteps'])->name('jobOffer.assignSteps');
     Route::get('/candidate', [CandidateController::class,'index'])->name('candidate.index'); 
     // Route::post('/professionist', [ProfessionistController::class,'store'])->name('professionist.store'); 
+    Route::post('/candidate', [CandidateController::class,'create'])->name('candidate.create'); 
 
 
 });
