@@ -34,8 +34,8 @@ const JobOffersList = () => {
 
         const jobOffersResponse = await axios.get("http://localhost:8000/api/v1/jobOffer");
         const jobOffersData = jobOffersResponse.data;
-
-        if (candidatesData.length > 0 && jobOffersData.length > 0 && user) {
+        console.log(jobOffersData.length);
+        if (jobOffersData.length > 0 && user) {
           console.log(user);
 
           const candidateFilter = candidatesData.filter((i) => i.users_id === user?.id);
