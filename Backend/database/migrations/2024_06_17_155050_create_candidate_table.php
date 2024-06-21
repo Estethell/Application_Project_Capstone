@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('job_offers_id')->constrained();
             // $table->foreignId('cvs_id')->constrained();
             $table->foreignId('steps_id')->constrained();
+            $table->foreignId('users_id')->constrained();
             $table->timestamps();
         });
     }

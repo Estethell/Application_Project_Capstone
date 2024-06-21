@@ -12,7 +12,7 @@
 }
 
 .miniDivHero {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.705);
   border-radius: 16px;
 }
 
@@ -41,7 +41,7 @@
 }
 
 /* Inizio cards job_offer */
-.card {
+.card1 {
   /* width: 350px;
   height: 160px; */
   background: #f7f9f9;
@@ -54,11 +54,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card:hover {
-  background-color: #cde8f3;
+.card1:hover {
+  background: rgb(134, 244, 255);
+  background: linear-gradient(322deg, rgba(193, 250, 255, 0.437) 0%, rgba(140, 197, 243, 0.7) 100%);
   transform: scale(1.02);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  color: rgb(58, 105, 167);
+  color: rgb(0, 0, 0);
   font-size: larger;
 }
 

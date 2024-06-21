@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Candidate extends Model
 {
+
+    protected $fillable = [
+        'job_offers_id',
+        'users_id',
+        'steps_id',
+    ];
     use HasFactory;
 
     public function job_offer(): BelongsTo
@@ -23,10 +29,7 @@ class Candidate extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function cv(): BelongsTo
-    {
-        return $this->belongsTo(Cv::class);
-    }
+    
 
     public function step(): BelongsTo
     {

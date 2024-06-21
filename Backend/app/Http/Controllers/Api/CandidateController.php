@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Http\Controllers\Controller;
-
 use App\Models\candidate;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorecandidateRequest;
 use App\Http\Requests\UpdatecandidateRequest;
 
@@ -16,17 +17,23 @@ class CandidateController extends Controller
     {
         $candidates = Candidate::all();
         return response()->json($candidates);
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($candidate)
+    public function create(Request $request)
     {
+        
+
         $candidate = Candidate::create([
-
-
+            'job_offers_id' => $request['jobOfferId'],
+            'users_id' => $request['userId'],
+            'steps_id' => $request['stepId'],
         ]);
+
+        return response()->json($candidate, 201); 
     }
 
     /**

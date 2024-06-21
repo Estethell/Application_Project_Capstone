@@ -1,6 +1,16 @@
 import { Col, Container, Row, Card } from "react-bootstrap";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const candidate = () => {
+const Candidate = () => {
+  const [candidates, setCandidates] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/v1/jobOffer")
+      .then((response) => {})
+      .then((data) => setCandidates(data));
+  }, []);
+
   return (
     <Container
       fluid
@@ -9,12 +19,16 @@ const candidate = () => {
     >
       <Row>
         <div>
+          {/* {candidates.map((cand) => (
+            retuirn
+          )
+          } */}
           <button className="m-3 btn bg-white border">Step1</button>
         </div>
         <Col lg={4}>
           <div className="m-4 candidateList p-4">
             <h2 className="text-center mb-3">Lista candidati</h2>
-            <Card>
+            <Card className="card1">
               <Card.Body>Nome e cognome del professionista</Card.Body>
             </Card>
           </div>
@@ -38,4 +52,4 @@ const candidate = () => {
   );
 };
 
-export default candidate;
+export default Candidate;

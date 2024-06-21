@@ -23,5 +23,16 @@ class UserSeeder extends Seeder
 
 
         ]);
+
+        User::Factory()->create([
+            "name"=> "user",
+            "surname"=> "user",
+            "email"=> "user@user.com",
+            "password"=> "useruser",
+            "role"=> "user",
+            "cv"=> "",
+
+
+        ]);
     }
 }
