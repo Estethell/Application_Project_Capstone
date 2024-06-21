@@ -17,7 +17,7 @@ const JobOffersList = () => {
       .then((data) => setJobOffers(data));
   }, []);
 
-  const handleClick = (jobOfferId) => {
+  const handleClick = (jobOffer) => {
     if (!user || user.role !== "user") {
       navigate("/register");
       return;
@@ -25,7 +25,8 @@ const JobOffersList = () => {
 
     axios
       .post("http://localhost:8000/api/v1/candidate", {
-        jobOfferId,
+        jobOfferId: jobOffer.id,
+        stepId: jobOffer.step[0].id,
         userId: user.id,
       })
       .then((response) => {
