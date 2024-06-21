@@ -49,7 +49,7 @@ class User extends Authenticatable
 
 public function candidate(): HasMany
 {
-    return $this->hasMany(Candidate::class);
+    return $this->hasMany(Candidate::class,'users_id');
 }
 
 

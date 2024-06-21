@@ -19,23 +19,20 @@ class Candidate extends Model
 
     public function job_offer(): BelongsTo
     {
-        return $this->belongsTo(Job_Offer::class);
+        return $this->belongsTo(Job_Offer::class, 'job_offers_id');
     }
-
-    
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'users_id');
     }
-
-    
 
     public function step(): BelongsTo
     {
-        return $this->belongsTo(Step::class);
+        return $this->belongsTo(Step::class, 'steps_id');
     }
-    public function event(): HasMany
+
+    public function events(): HasMany
     {
         return $this->hasMany(Event::class);
     }

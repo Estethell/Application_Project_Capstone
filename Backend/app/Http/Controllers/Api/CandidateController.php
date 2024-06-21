@@ -47,9 +47,23 @@ class CandidateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(candidate $candidate)
+    public function show()
     {
-        //
+        error_log("ciao");
+        try {
+            $candidates = Candidate::with('job_offer', 'user', 'step')->get();
+            error_log($candidates);
+            
+            return [
+                'success' => true,
+                'data' => $candidates
+            ];
+        } catch (\Exception $e) {
+            return response([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

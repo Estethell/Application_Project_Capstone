@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('job_offers_id')->constrained();
-            // $table->foreignId('cvs_id')->constrained();
-            $table->foreignId('steps_id')->constrained();
-            $table->foreignId('users_id')->constrained();
+            $table->foreignId('job_offers_id')->constrained('job_offers');
+            $table->foreignId('steps_id')->constrained('steps');
+            $table->foreignId('users_id')->constrained('users'); 
             $table->timestamps();
         });
     }

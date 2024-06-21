@@ -13,7 +13,7 @@ class Job_offer extends Model
 
     public function candidate(): HasMany
     {
-        return $this->hasMany(Candidate::class);
+        return $this->hasMany(Candidate::class,'job_offers_id');
     }
 
     public function steps(): BelongsToMany

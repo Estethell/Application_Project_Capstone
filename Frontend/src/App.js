@@ -19,15 +19,12 @@ function App() {
   axios.defaults.withXSRFToken = true;
   axios.defaults.baseURL = "http://localhost:8000";
 
-  
-
   return (
     <BrowserRouter>
       <MyNav />
 
       <Routes>
-        <Route path="/" element={<JobOffer />}></Route>
-
+        <Route path="/" element={<JobOffer />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/candidate" element={<Candidate />}></Route>
           {/* <Route path="/clientForm" element={<ClientForm />}></Route> */}

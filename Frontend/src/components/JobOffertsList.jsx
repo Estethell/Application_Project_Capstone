@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { LOGIN } from "../redux/actions";
 import { Spinner } from "react-bootstrap";
+import { SET_JOB_OFFERS } from "../redux/actions";
 
 const JobOffersList = () => {
   const [candidates, setCandidates] = useState([]);
@@ -36,7 +37,7 @@ const JobOffersList = () => {
         const jobOffersData = jobOffersResponse.data;
         console.log(jobOffersData.length);
         if (jobOffersData.length > 0 && user) {
-          console.log(user);
+          console.log("ooooo", candidatesData);
 
           const candidateFilter = candidatesData.filter((i) => i.users_id === user?.id);
           console.log("candidateFilter:", candidateFilter);
@@ -82,14 +83,18 @@ const JobOffersList = () => {
       });
   };
 
-  const handleClickAdmin = () => {
+  const handleClickAdmin = (jobOffer) => {
+    dispatch({
+      type: SET_JOB_OFFERS,
+      payload: jobOffer,
+    });
     navigate("/candidate");
   };
 
   return (
     <>
       {!loaded && (
-        <div>
+        <div className="d-flex justify-content-center m-5">
           <Spinner animation="border"></Spinner>
         </div>
       )}
@@ -102,7 +107,7 @@ const JobOffersList = () => {
               <button hidden={user.role === "admin"} className="card__button" onClick={() => handleClick(jobOffer)}>
                 Candidati
               </button>
-              <button hidden={user.role === "user"} className="card__button" onClick={() => handleClickAdmin()}>
+              <button hidden={user.role === "user"} className="card__button" onClick={() => handleClickAdmin(jobOffer)}>
                 Visualizza Candidati
               </button>
             </div>

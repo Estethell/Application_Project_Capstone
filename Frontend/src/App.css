@@ -63,6 +63,23 @@
   font-size: larger;
 }
 
+.card2 {
+  background: #f7f9f9;
+
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card2:hover {
+  background: rgb(134, 244, 255);
+  background: linear-gradient(322deg, rgba(193, 250, 255, 0.437) 0%, rgba(140, 197, 243, 0.7) 100%);
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  color: rgb(0, 0, 0);
+  font-size: larger;
+}
+
 .card__title {
   font-size: 1.4em;
   font-weight: 800;

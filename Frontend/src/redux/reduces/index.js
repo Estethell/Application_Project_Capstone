@@ -1,5 +1,6 @@
 const initialState = {
   user: null,
+  jobOffers: [],
 };
 
 const mainReducer = function (state = initialState, action) {
@@ -15,6 +16,13 @@ const mainReducer = function (state = initialState, action) {
         ...state,
         user: null,
       };
+
+    case "SET_JOB_OFFERS":
+      return {
+        ...state,
+        jobOffers: action.payload,
+      };
+
     default:
       return state;
   }
