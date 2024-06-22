@@ -17,12 +17,12 @@ const ProtectedRoutes = () => {
           payload: res.data,
         })
       )
-      .catch((err) => navigate("/login"));
+      .catch((err) => navigate("/"));
   }, [dispatch]);
 
   const user = useSelector((state) => state.user);
 
-  return user ? <Outlet /> : <Navigate to="/login" />;
+  return user ? <Outlet /> : <Navigate to="/joboffer" />;
 };
 
 export default ProtectedRoutes;

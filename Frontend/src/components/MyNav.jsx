@@ -13,13 +13,13 @@ const TopNav = () => {
     axios
       .post("/logout")
       .then(() => dispatch({ type: LOGOUT }))
-      .then(() => navigate("/login"));
+      .then(() => navigate("/"));
   };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/joboffer">
           EnjoyJob
         </Link>
         <button
@@ -72,7 +72,7 @@ const TopNav = () => {
             </>
           ) : (
             <>
-              <Link className="btn btn-primary me-2" to="/login">
+              <Link className="btn btn-primary me-2" to="/">
                 Login
               </Link>
               <Link className="btn btn-primary" to="/register">

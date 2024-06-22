@@ -69,9 +69,13 @@ class CandidateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(candidate $candidate)
+    public function edit(Request $body, $id)
     {
-        //
+        $candidate = Candidate::findOrFail($id);
+        $candidate->steps_id=$body['nextStepId'];
+        $candidate->save();
+        return $candidate;
+
     }
 
     /**

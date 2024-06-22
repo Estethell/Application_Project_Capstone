@@ -36,7 +36,7 @@ const Register = () => {
   const handleClick = (e) => {
     e.preventDefault();
 
-    navigate("/login");
+    navigate("/");
   };
 
   const submitLogin = (ev) => {

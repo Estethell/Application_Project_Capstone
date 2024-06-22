@@ -41,6 +41,7 @@ const Login = () => {
           payload: res.data,
         });
       });
+    navigate("/joboffer");
 
     // const response = await axios.get("/api/user");
     // return response.data;

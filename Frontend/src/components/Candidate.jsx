@@ -1,14 +1,17 @@
-import { Col, Container, Row, Card } from "react-bootstrap";
+import { Col, Container, Row, Card, Button } from "react-bootstrap";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import JobOffer from "./JobOffer";
+import axios from "axios";
 
-const Candidate = (jobSelected) => {
-  console.log(jobSelected);
+const Candidate = () => {
   const [candidates, setCandidates] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const jobOffers = useSelector((state) => state.jobOffers);
+  console.log("selectedUser:", selectedUser);
   console.log("joboffers:", jobOffers);
+
   const handleClick = (cand) => {
     setSelectedUser(cand);
   };
@@ -30,6 +33,34 @@ const Candidate = (jobSelected) => {
       });
   }, []);
 
+  const handleArrowClick = () => {
+    debugger;
+    const stepId = selectedUser.steps_id;
+    console.log(jobOffers);
+    const stepIndex = jobOffers.steps.findIndex((x) => x.id === stepId);
+    let nextStepId;
+    if (stepIndex < jobOffers.steps.length - 1) {
+      nextStepId = jobOffers.steps[stepIndex + 1].id;
+    } else {
+      return alert("Non ci sono altri step in questa offerta di lavoro");
+    }
+
+    axios
+      .put(`http://localhost:8000/api/v1/candidate/nextStep/${selectedUser.id}`, {
+        candidate: selectedUser,
+        nextStepId: nextStepId,
+      })
+      .then((response) => {
+        console.log("data 2", response.data);
+        setSelectedUser(response.data[0]);
+        console.log(selectedUser);
+        alert("Step modificato con successo");
+      })
+      .catch((error) => {
+        console.error("There was a problem with the axios request:", error);
+      });
+  };
+
   return (
     <Container
       fluid
@@ -39,7 +70,11 @@ const Candidate = (jobSelected) => {
       <Row>
         <div>
           {jobOffers.steps.map((step) => {
-            return <button className="m-3 btn bg-white border">{step.name}</button>;
+            return (
+              <button key={step.id} className="m-3 btn bg-white border">
+                {step.name}
+              </button>
+            );
           })}
         </div>
         <Col lg={4}>
@@ -49,8 +84,8 @@ const Candidate = (jobSelected) => {
             {candidates &&
               candidates.map((cand) => {
                 return (
-                  <Card className="card2 fs-5" onClick={() => handleClick(cand)}>
-                    <Card.Body key={cand.id}>
+                  <Card className="card2 fs-5" onClick={() => handleClick(cand)} key={cand.id}>
+                    <Card.Body>
                       <span className="mx-2">{cand.user.name}</span>
 
                       <span className="mx-2">{cand.user.surname}</span>
@@ -65,6 +100,16 @@ const Candidate = (jobSelected) => {
             <h2 className="text-center mb-3">Dettaglio candidato</h2>
             {selectedUser ? (
               <Card style={{ width: "60em", height: "15em" }}>
+                <Card.Header className="bg-white">
+                  <svg
+                    onClick={handleArrowClick}
+                    style={{ width: "1.5em", height: "1.5em" }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM294.6 135.1c-4.2-4.5-10.1-7.1-16.3-7.1C266 128 256 138 256 150.3V208H160c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h96v57.7c0 12.3 10 22.3 22.3 22.3c6.2 0 12.1-2.6 16.3-7.1l99.9-107.1c3.5-3.8 5.5-8.7 5.5-13.8s-2-10.1-5.5-13.8L294.6 135.1z" />
+                  </svg>
+                </Card.Header>
                 <Card.Body className="py-5">
                   <Card.Title>
                     <span className="mx-2 fs-2">{selectedUser.user.name}</span>{" "}
@@ -72,6 +117,7 @@ const Candidate = (jobSelected) => {
                   </Card.Title>
 
                   <Card.Text>{selectedUser.user.email}</Card.Text>
+
                   {/* <Card.Link href="#">Card Link</Card.Link> */}
                   <Card.Link href="#">Link al CV</Card.Link>
                 </Card.Body>

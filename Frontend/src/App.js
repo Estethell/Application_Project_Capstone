@@ -24,13 +24,12 @@ function App() {
       <MyNav />
 
       <Routes>
-        <Route path="/" element={<JobOffer />} />
         <Route element={<ProtectedRoutes />}>
+          <Route path="/joboffer" element={<JobOffer />} />
           <Route path="/candidate" element={<Candidate />}></Route>
-          {/* <Route path="/clientForm" element={<ClientForm />}></Route> */}
         </Route>
         <Route element={<GuestRoutes />}>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
       </Routes>

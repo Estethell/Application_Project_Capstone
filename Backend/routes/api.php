@@ -23,6 +23,7 @@ Route::name('api.v1.')
    
     Route::post('/candidate', [CandidateController::class,'create'])->name('candidate.create'); 
     Route::get('/candidate/list', [CandidateController::class,'show'])->name('candidate.show'); 
+    Route::put('/candidate/nextStep/{id}', [CandidateController::class,'edit'])->name('candidate.edit'); 
 
 
 });
