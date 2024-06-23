@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Http\Controllers\Controller;
-
 use App\Models\step;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorestepRequest;
 use App\Http\Requests\UpdatestepRequest;
 
@@ -14,15 +15,15 @@ class StepController extends Controller
      */
     public function index()
     {
-        //
+        $steps = Step::all();
+        return response()->json($steps);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
     }
 
     /**

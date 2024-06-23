@@ -3,7 +3,7 @@ import "./App.css";
 import MyNav from "./components/MyNav";
 import JobOffer from "./components/JobOffer";
 import Footer from "./components/Footer";
-import ClientForm from "./components/ClientForm";
+
 import Candidate from "./components/Candidate";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import GuestRoutes from "./components/GuestRoutes";
@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { LOGIN } from "./redux/actions";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import JobForm from "./components/JobForm";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -27,6 +28,7 @@ function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path="/joboffer" element={<JobOffer />} />
           <Route path="/candidate" element={<Candidate />}></Route>
+          <Route path="/jobform" element={<JobForm />}></Route>
         </Route>
         <Route element={<GuestRoutes />}>
           <Route path="/" element={<Login />} />

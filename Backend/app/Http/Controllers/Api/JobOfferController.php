@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Http\Controllers\Controller;
+use App\Models\Step;
 
 use App\Models\Job_offer;
-use App\Models\Step;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJob_offerRequest;
 use App\Http\Requests\UpdateJob_offerRequest;
 
@@ -22,9 +23,24 @@ class JobOfferController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
+
+        
+        $jobOffer = Job_offer::create([
+            'name' => $request['name'],
+            'description' => $request['description'],
+        ]);
+
+        
+        
+
+        $jobOffer->steps()->attach($request['steps']);
+
+
+
+        return response()->json($jobOffer->load('steps'), 201); 
     }
 
     /**

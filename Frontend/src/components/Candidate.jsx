@@ -9,6 +9,7 @@ const Candidate = () => {
   const [candidates, setCandidates] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const jobOffers = useSelector((state) => state.jobOffers);
+  const [selectedStep, setSelectedStep] = useState(jobOffers.steps[0].id);
   console.log("selectedUser:", selectedUser);
   console.log("joboffers:", jobOffers);
 
@@ -25,16 +26,18 @@ const Candidate = () => {
         return response.json();
       })
       .then((data) => {
-        setCandidates(data.data);
+        let filteredCandidate = data.data.filter((candidate) => candidate.steps_id === selectedStep);
+
+        setCandidates(filteredCandidate);
+
         console.log("data", data);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
-  }, []);
+  }, [selectedStep]);
 
   const handleArrowClick = () => {
-    debugger;
     const stepId = selectedUser.steps_id;
     console.log(jobOffers);
     const stepIndex = jobOffers.steps.findIndex((x) => x.id === stepId);
@@ -61,6 +64,11 @@ const Candidate = () => {
       });
   };
 
+  const handleChangeSteps = (step) => {
+    setSelectedStep(step.id);
+    setSelectedUser(null);
+  };
+
   return (
     <Container
       fluid
@@ -71,7 +79,13 @@ const Candidate = () => {
         <div>
           {jobOffers.steps.map((step) => {
             return (
-              <button key={step.id} className="m-3 btn bg-white border">
+              <button
+                key={step.id}
+                className="m-3 btn bg-white border"
+                onClick={() => {
+                  handleChangeSteps(step);
+                }}
+              >
                 {step.name}
               </button>
             );
