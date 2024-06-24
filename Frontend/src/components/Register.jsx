@@ -13,10 +13,12 @@ const Register = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
+    surname: "",
     email: "",
     password: "",
     password_confirmation: "",
     profile_img: "",
+    role: "user",
   });
 
   const [errors, setErrors] = useState(null);
@@ -46,11 +48,12 @@ const Register = () => {
       .then(() => {
         const body = new FormData();
         body.append("name", formData.name);
+        body.append("surname", formData.surname);
         body.append("email", formData.email);
         body.append("password", formData.password);
         body.append("password_confirmation", formData.password_confirmation);
         // body.append("profile_img", profileImage);
-        body.append("surname", formData.surname);
+
         body.append("role", "user");
         body.append("cv", formData.cv);
         return axios.post("/register", body);
@@ -112,10 +115,10 @@ const Register = () => {
           <input
             type="password"
             className="form-control"
-            id="password_confirmation"
-            name="password_confirmation"
+            id="password"
+            name="password"
             onChange={(ev) => updateInputValue(ev)}
-            value={formData.password_confirmation}
+            value={formData.password}
           />
         </label>
         <label className="my-1">
@@ -148,103 +151,6 @@ const Register = () => {
           </button>{" "}
         </p>
       </Form>
-
-      {/* <form onSubmit={(ev) => submitLogin(ev)} noValidate>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Nome
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name"
-            onChange={(ev) => updateInputValue(ev)}
-            value={formData.name}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="surname" className="form-label">
-            Cognome
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="surname"
-            name="surname"
-            onChange={(ev) => updateInputValue(ev)}
-            value={formData.surname}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            onChange={(ev) => updateInputValue(ev)}
-            value={formData.email}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            onChange={(ev) => updateInputValue(ev)}
-            value={formData.password}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password_confirmation" className="form-label">
-            Conferma Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password_confirmation"
-            name="password_confirmation"
-            onChange={(ev) => updateInputValue(ev)}
-            value={formData.password_confirmation}
-          />
-        </div> */}
-      {/* <div className="mb-3">
-          <label htmlFor="profile_img" className="form-label">
-            Immagine di profilo
-          </label>
-          <input
-            className="form-control"
-            type="file"
-            id="profile_img"
-            name="profile_img"
-            onChange={(ev) => updateImageField(ev)}
-            value={formData.profile_img}
-          />
-        </div> */}
-      {/* <div className="mb-3">
-          <label htmlFor="cv" className="form-label">
-            Carica il tuo curriculum:
-          </label>
-          <input
-            type="file"
-            className="form-control"
-            id="cv"
-            name="cv"
-            onChange={(ev) => updateInputValue(ev)}
-            value={formData.cv}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Registrati
-        </button>
-      </form> */}
     </Container>
   );
 };

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\JobOfferController;
 use App\Http\Controllers\Api\CandidateController;
 use App\Http\Controllers\Api\ProfessionistController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -17,6 +18,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::name('api.v1.')
 ->prefix('v1')
 ->group(function () {
+    Route::post('/register', [RegisteredUserController::class,'store'])->name('register.store'); 
     Route::get('/jobOffer', [JobOfferController::class,'index'])->name('jobOffer.index'); 
     Route::get('/jobOffer/{id}', [JobOfferController::class,'show'])->name('jobOffer.show'); 
     Route::post('/jobOffer/{jobOffer}/assignSteps', [JobOfferController::class, 'assignSteps'])->name('jobOffer.assignSteps');

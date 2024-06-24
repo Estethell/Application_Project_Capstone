@@ -70,7 +70,6 @@ const JobOffersList = () => {
         userId: user.id,
       })
       .then((response) => {
-        alert("Candidatura inviata con successo!");
         console.log("Candidatura inviata:", response.data);
 
         const updatedJobOffers = jobOffers.filter((offer) => offer.id !== jobOffer.id);
@@ -121,15 +120,17 @@ const JobOffersList = () => {
               <button hidden={user.role === "admin"} className="card__button" onClick={() => handleClick(jobOffer)}>
                 Candidati
               </button>
-              <div hidden={user.role === "user"} className="d-flex justidy-content-end ">
-                <button className="card__button m-2" onClick={() => handleClickClientList(jobOffer)}>
-                  Visualizza Candidati
-                </button>
+              {user.role === "user" ? null : (
+                <div className="d-flex justidy-content-end">
+                  <button className="card__button m-2" onClick={() => handleClickClientList(jobOffer)}>
+                    Visualizza Candidati
+                  </button>
 
-                <button className="card__button m-2 " onClick={() => handleClickDelete(jobOffer.id)}>
-                  Cancella
-                </button>
-              </div>
+                  <button className="card__button m-2" onClick={() => handleClickDelete(jobOffer.id)}>
+                    Cancella
+                  </button>
+                </div>
+              )}
             </div>
           ) : null}
         </div>
