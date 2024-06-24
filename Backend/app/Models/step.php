@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Step extends Model
 {
+    protected $fillable = [
+        'name',
+        'description',
+        
+    ];
     use HasFactory;
 
     public function candidate(): HasMany

@@ -39,6 +39,13 @@ const TopNav = () => {
                 </Link>
               </li>
             )}
+            {user?.role === "user" && (
+              <li className="nav-item">
+                <Link className="nav-link active" to="/clientJobs">
+                  Lista delle tue candidature
+                </Link>
+              </li>
+            )}
           </ul>
 
           {user ? (

@@ -14,6 +14,7 @@ import { LOGIN } from "./redux/actions";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import JobForm from "./components/JobForm";
+import ClientCandidateList from "./components/ClientCandidateList";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -29,6 +30,7 @@ function App() {
           <Route path="/joboffer" element={<JobOffer />} />
           <Route path="/candidate" element={<Candidate />}></Route>
           <Route path="/jobform" element={<JobForm />}></Route>
+          <Route path="/clientJobs" element={<ClientCandidateList />} />
         </Route>
         <Route element={<GuestRoutes />}>
           <Route path="/" element={<Login />} />

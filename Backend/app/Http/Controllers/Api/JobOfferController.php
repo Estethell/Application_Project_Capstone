@@ -26,7 +26,7 @@ class JobOfferController extends Controller
     public function create(Request $request)
     {
 
-
+        error_log("sono in create");
         
         $jobOffer = Job_offer::create([
             'name' => $request['name'],
@@ -35,8 +35,9 @@ class JobOfferController extends Controller
 
         
         
-
+error_log("ciao");
         $jobOffer->steps()->attach($request['steps']);
+        error_log("ciao2");
 
 
 

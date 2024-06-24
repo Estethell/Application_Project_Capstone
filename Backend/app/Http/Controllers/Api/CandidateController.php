@@ -89,8 +89,18 @@ class CandidateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(candidate $candidate)
+    public function destroy($id)
     {
-        //
+        
+        $candidate = Candidate::find($id);
+
+        if (!$candidate) {
+            return response()->json(['success' => false, 'message' => 'Candidatura non trovata'], 404);
+        }
+
+        
+        $candidate->delete();
+
+        return response()->json(['success' => true, 'message' => 'Candidatura eliminata con successo']);
     }
 }

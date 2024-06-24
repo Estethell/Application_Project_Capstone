@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Job_offer extends Model
 {
+
+    protected $fillable = [
+        'name',
+        'description',
+        
+    ];
     use HasFactory;
 
     public function candidate(): HasMany
