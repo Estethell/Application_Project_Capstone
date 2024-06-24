@@ -5,7 +5,9 @@ use App\Models\Step;
 
 use App\Models\Job_offer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use App\Http\Requests\StoreJob_offerRequest;
 use App\Http\Requests\UpdateJob_offerRequest;
 
@@ -113,8 +115,23 @@ error_log("ciao");
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Job_offer $job_offer)
-    {
-        //
+    public function destroy($id)
+{
+    DB::beginTransaction();
+    try {
+        
+        $jobOffer = Job_offer::findOrFail($id);
+
+        $jobOffer->steps()->detach();
+
+       
+        $jobOffer->delete();
+
+        DB::commit();
+        return response()->json(['message' => 'Job Offer deleted successfully'], 200);
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return response()->json(['error' => 'Unable to delete Job Offer', 'message' => $e->getMessage()], 500);
     }
+}
 }

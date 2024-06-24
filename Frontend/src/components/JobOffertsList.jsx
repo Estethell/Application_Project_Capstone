@@ -83,12 +83,26 @@ const JobOffersList = () => {
       });
   };
 
-  const handleClickAdmin = (jobOffer) => {
+  const handleClickClientList = (jobOffer) => {
     dispatch({
       type: SET_JOB_OFFERS,
       payload: jobOffer,
     });
     navigate("/candidate");
+  };
+
+  const handleClickDelete = (id) => {
+    axios
+      .delete(`http://localhost:8000/api/v1/jobOffer/job/${id}`)
+      .then((response) => {
+        console.log("Cancellazione avvenuta con successo:", response.data);
+        const updatedJobOffers = jobOffers.filter((offer) => offer.id !== id);
+        setJobOffers(updatedJobOffers);
+        alert("Offerta di lavoro rimossa con successo");
+      })
+      .catch((error) => {
+        console.error("Errore nella cancellazione del job offer:", error);
+      });
   };
 
   return (
@@ -107,9 +121,15 @@ const JobOffersList = () => {
               <button hidden={user.role === "admin"} className="card__button" onClick={() => handleClick(jobOffer)}>
                 Candidati
               </button>
-              <button hidden={user.role === "user"} className="card__button" onClick={() => handleClickAdmin(jobOffer)}>
-                Visualizza Candidati
-              </button>
+              <div hidden={user.role === "user"} className="d-flex justidy-content-end ">
+                <button className="card__button m-2" onClick={() => handleClickClientList(jobOffer)}>
+                  Visualizza Candidati
+                </button>
+
+                <button className="card__button m-2 " onClick={() => handleClickDelete(jobOffer.id)}>
+                  Cancella
+                </button>
+              </div>
             </div>
           ) : null}
         </div>

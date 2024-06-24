@@ -28,5 +28,6 @@ Route::name('api.v1.')
     Route::put('/candidate/nextStep/{id}', [CandidateController::class,'edit'])->name('candidate.edit'); 
     Route::post('/joboffer/form', [JobOfferController::class,'create'])->name('joboffer.create'); 
     Route::delete('candidate/{id}', [CandidateController::class, 'destroy'])->name('candidate.destroy'); 
+    Route::delete('jobOffer/job/{id}', [JobOfferController::class, 'destroy'])->name('jobOffer.destroy'); 
 
 });
