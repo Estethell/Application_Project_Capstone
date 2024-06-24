@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const JobForm = () => {
   const [steps, setSteps] = useState([]);
@@ -10,6 +11,8 @@ const JobForm = () => {
     description: "",
     steps: [],
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -43,6 +46,7 @@ const JobForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    navigate("/jobOffer");
 
     axios
       .post("http://localhost:8000/api/v1/joboffer/form", {
@@ -76,13 +80,13 @@ const JobForm = () => {
         </div>
         <div className="form-group my-4">
           <label htmlFor="description">Descrizione:</label>
-          <input
-            type="text"
+          <textarea
             className="form-control"
             id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
+            rows={5}
             required
           />
         </div>

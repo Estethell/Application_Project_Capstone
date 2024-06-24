@@ -19,7 +19,7 @@ const TopNav = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/joboffer">
+        <Link className="navbar-brand fw-bold" to="/joboffer">
           EnjoyJob
         </Link>
         <button
@@ -34,14 +34,14 @@ const TopNav = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {user?.role === "admin" && (
               <li className="nav-item">
-                <Link className="nav-link active" to="/jobform">
+                <Link className="nav-link active fw-bold" to="/jobform">
                   Aggiungi nuovo annuncio
                 </Link>
               </li>
             )}
             {user?.role === "user" && (
               <li className="nav-item">
-                <Link className="nav-link active" to="/clientJobs">
+                <Link className="nav-link active fw-bold" to="/clientJobs">
                   Lista delle tue candidature
                 </Link>
               </li>
