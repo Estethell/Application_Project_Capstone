@@ -2,42 +2,36 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { LOGIN } from "../redux/actions";
-import { Container } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [profileImage, setProfileImage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
     email: "",
     password: "",
     password_confirmation: "",
-    profile_img: "",
+
     role: "user",
+    cv: null,
   });
 
   const [errors, setErrors] = useState(null);
 
   const updateInputValue = (ev) => {
+    const { name, value, files } = ev.target;
     setFormData((oldFormData) => ({
       ...oldFormData,
-      [ev.target.name]: ev.target.value,
+      [name]: files ? files[0] : value,
     }));
   };
 
-  // const updateImageField = (ev) => {
-  //   updateInputValue(ev);
-  //   setProfileImage(ev.target.files[0]);
-  // };
-
   const handleClick = (e) => {
     e.preventDefault();
-
     navigate("/");
   };
 
@@ -52,10 +46,11 @@ const Register = () => {
         body.append("email", formData.email);
         body.append("password", formData.password);
         body.append("password_confirmation", formData.password_confirmation);
-        // body.append("profile_img", profileImage);
 
         body.append("role", "user");
-        body.append("cv", formData.cv);
+        if (formData.cv) {
+          body.append("cv", formData.cv);
+        }
         return axios.post("/register", body);
       })
       .then(() => axios.get("/api/user"))
@@ -64,6 +59,11 @@ const Register = () => {
           type: LOGIN,
           payload: res.data,
         });
+        navigate("/joboffer");
+      })
+      .catch((error) => {
+        console.error("An error occurred during the registration process:", error);
+        navigate("/NotFound");
       });
   };
 
@@ -80,7 +80,7 @@ const Register = () => {
               className="form-control"
               id="name"
               name="name"
-              onChange={(ev) => updateInputValue(ev)}
+              onChange={updateInputValue}
               value={formData.name}
             />
           </label>
@@ -92,7 +92,7 @@ const Register = () => {
               className="form-control"
               id="surname"
               name="surname"
-              onChange={(ev) => updateInputValue(ev)}
+              onChange={updateInputValue}
               value={formData.surname}
             />
           </label>
@@ -105,7 +105,7 @@ const Register = () => {
             className="form-control"
             id="email"
             name="email"
-            onChange={(ev) => updateInputValue(ev)}
+            onChange={updateInputValue}
             value={formData.email}
           />
         </label>
@@ -117,7 +117,7 @@ const Register = () => {
             className="form-control"
             id="password"
             name="password"
-            onChange={(ev) => updateInputValue(ev)}
+            onChange={updateInputValue}
             value={formData.password}
           />
         </label>
@@ -128,21 +128,15 @@ const Register = () => {
             className="form-control"
             id="password_confirmation"
             name="password_confirmation"
-            onChange={(ev) => updateInputValue(ev)}
+            onChange={updateInputValue}
             value={formData.password_confirmation}
           />
         </label>
         <label className="my-1">
           <span>Carica il Curriculum</span>
-          <input
-            type="file"
-            className="form-control"
-            id="cv"
-            name="cv"
-            onChange={(ev) => updateInputValue(ev)}
-            value={formData.cv}
-          />
+          <input type="file" className="form-control" id="cv" name="cv" onChange={updateInputValue} />
         </label>
+
         <button className="submit my-3">Registrati</button>
         <p className="signin">
           Hai già un account?{" "}

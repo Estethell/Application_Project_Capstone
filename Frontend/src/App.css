@@ -233,3 +233,12 @@
 }
 
 /* fine form register/login */
+
+.buttonSteps {
+  background-color: #d7e6ff !important;
+  transform: scale(1.08);
+}
+
+.stepSvg:hover {
+  transform: scale(1.2);
+}

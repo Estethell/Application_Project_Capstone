@@ -24,6 +24,11 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+       
+    ];
+
+    protected $dates = [
+        'email_verified_at',
     ];
 
     /**

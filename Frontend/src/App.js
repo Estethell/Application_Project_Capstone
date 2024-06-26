@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import MyNav from "./components/MyNav";
 import JobOffer from "./components/JobOffer";
@@ -15,6 +15,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import JobForm from "./components/JobForm";
 import ClientCandidateList from "./components/ClientCandidateList";
+import NotFound from "./components/NotFound";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -36,6 +37,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
       <Footer />
     </BrowserRouter>

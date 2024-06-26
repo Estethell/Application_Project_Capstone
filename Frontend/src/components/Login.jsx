@@ -2,9 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { LOGIN } from "../redux/actions";
-import { Container } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Form } from "react-bootstrap";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,6 @@ const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-
     navigate("/register");
   };
 
@@ -40,11 +38,12 @@ const Login = () => {
           type: LOGIN,
           payload: res.data,
         });
+        navigate("/joboffer");
+      })
+      .catch((error) => {
+        console.error("An error occurred during the login process:", error);
+        navigate("/NotFound");
       });
-    navigate("/joboffer");
-
-    // const response = await axios.get("/api/user");
-    // return response.data;
   };
 
   return (
@@ -86,39 +85,6 @@ const Login = () => {
           </button>{" "}
         </p>
       </Form>
-
-      {/* <form onSubmit={(ev) => submitLogin(ev)} noValidate>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email:
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            onChange={(ev) => updateInputValue(ev)}
-            value={formData.email}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password:
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            onChange={(ev) => updateInputValue(ev)}
-            value={formData.password}
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary">
-          Effettua il Login
-        </button>
-      </form> */}
     </Container>
   );
 };

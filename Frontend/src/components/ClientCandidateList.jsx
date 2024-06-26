@@ -17,7 +17,10 @@ const ClientCandidateList = () => {
         return response.json();
       })
       .then((data) => {
-        setUserCandidate(data.data);
+        const candidateJobs = data.data.filter((cand) => cand.users_id === user.id);
+        console.log("candidato job:", candidateJobs);
+        console.log("data candidate list:", data);
+        setUserCandidate(candidateJobs);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -28,7 +31,6 @@ const ClientCandidateList = () => {
     axios
       .delete(`http://localhost:8000/api/v1/candidate/${id}`)
       .then(() => {
-        // Filtra l'array per rimuovere la card eliminata
         const updatedCandidates = userCandidate.filter((cand) => cand.id !== id);
         setUserCandidate(updatedCandidates);
         alert("Candidatura eliminata con successo");

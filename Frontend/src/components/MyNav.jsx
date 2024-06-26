@@ -51,7 +51,12 @@ const TopNav = () => {
           {user ? (
             <>
               <span className="me-2">{user.name}</span>
-              <img className="me-2" src={user.profile_img} alt="" style={{ height: "50px", width: "50px" }} />
+              <img
+                className="me-2 rounded-circle"
+                src="/assests/profile_img.jpg"
+                alt=""
+                style={{ height: "50px", width: "50px" }}
+              />
               <button className="btn btn-primary" onClick={logout}>
                 Logout
               </button>
