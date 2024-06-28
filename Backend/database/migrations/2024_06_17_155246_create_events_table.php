@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->time('time');
-            $table->string('type');
-            $table->string('description', 100);
+            $table->string('type', 20);
+            $table->string('description', 200);
             $table->foreignId('candidates_id')->constrained();
             $table->timestamps();
         });

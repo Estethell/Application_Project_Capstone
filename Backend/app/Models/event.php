@@ -8,10 +8,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
+
+    protected $fillable = [
+        'type',
+        'description',
+        'time',
+        'candidates_id',
+    ];
     use HasFactory;
 
     public function candidate(): BelongsTo
     {
-        return $this->belongsTo(Candidate::class);
+        return $this->belongsTo(Candidate::class, 'candidates_id');
     }
 }

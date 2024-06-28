@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Http\Controllers\Controller;
-
 use App\Models\event;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreeventRequest;
 use App\Http\Requests\UpdateeventRequest;
 
@@ -12,9 +14,10 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $events = Event::where('candidates_id', $id)->get();
+    return response()->json($events);
     }
 
     /**
@@ -30,15 +33,26 @@ class EventController extends Controller
      */
     public function store(StoreeventRequest $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(event $event)
+    public function show(Request $request)
     {
-        //
+        error_log($request);
+
+        $time = Carbon::parse($request->input('time'))->toDateTimeString();
+        
+        $event = Event::create([
+            'candidates_id' =>$request['id'],
+            'time' => $time,
+            'type' => $request['type'],
+            'description' => $request['comment'],
+        ]);
+
+        return response()->json($event, 201); 
     }
 
     /**

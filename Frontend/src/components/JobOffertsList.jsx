@@ -35,16 +35,13 @@ const JobOffersList = () => {
 
         const jobOffersResponse = await axios.get("http://localhost:8000/api/v1/jobOffer");
         const jobOffersData = jobOffersResponse.data;
-        console.log(jobOffersData.length);
-        if (jobOffersData.length > 0 && user) {
-          console.log("ooooo", candidatesData);
 
+        if (jobOffersData.length > 0 && user) {
           const candidateFilter = candidatesData.filter((i) => i.users_id === user?.id);
-          console.log("candidateFilter:", candidateFilter);
+
           const jobOffersToExclude = candidateFilter.map((i) => i.job_offers_id);
-          console.log("jobOffersToExclude:", jobOffersToExclude);
+
           const filtered = jobOffersData.filter((jobOffer) => !jobOffersToExclude.includes(jobOffer.id));
-          console.log("Filtered", filtered);
 
           setJobOffers(filtered);
           setLoaded(true);
