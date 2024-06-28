@@ -7,9 +7,12 @@ import axios from "axios";
 const ModalCandidate = ({ selectedUser, fetchCall }) => {
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({ comment: "" });
-  console.log("parametro inviato:", selectedUser);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false); // Chiudi il modale
+    setFormData({ comment: "" }); // Reimposta il valore della textarea a una stringa vuota
+  };
+
   const handleShow = () => setShow(true);
 
   const handleInputChange = (e) => {
@@ -19,8 +22,6 @@ const ModalCandidate = ({ selectedUser, fetchCall }) => {
 
   const onSubmitModal = (e) => {
     e.preventDefault();
-    console.log("modal:", formData);
-    console.log("user:", selectedUser);
     axios
       .post(`http://localhost:8000/api/v1/event/${selectedUser.id}`, {
         comment: formData.comment,
@@ -32,7 +33,7 @@ const ModalCandidate = ({ selectedUser, fetchCall }) => {
         console.log("Response:", response);
         console.log("Candidatura inviata:", response.data);
         fetchCall(selectedUser);
-        handleClose();
+        handleClose(); // Chiudi il modale dopo aver inviato i dati
       })
       .catch((error) => {
         console.error("Error:", error);
