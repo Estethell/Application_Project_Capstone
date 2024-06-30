@@ -63,6 +63,16 @@ const Candidate = () => {
           .catch((error) => {
             console.error("Error:", error);
           });
+
+        axios
+          .post("http://localhost:8000/api/v1/sendEmail")
+          .then((response) => {
+            console.log(response.data.message);
+          })
+          .catch((error) => {
+            console.error("There was an error sending the email!", error);
+          });
+
         setSelectedUser(null);
         alert("Candidatura eliminata con successo");
       })
