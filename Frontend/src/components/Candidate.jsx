@@ -69,7 +69,6 @@ const Candidate = () => {
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/candidate/list")
       .then((response) => {
-        debugger;
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
         }
@@ -77,7 +76,6 @@ const Candidate = () => {
       })
       .then((data) => {
         let filteredCandidate = data.data.filter((candidate) => {
-          debugger;
           return candidate.steps_id === selectedStep && candidate.job_offers_id === jobOffers.id;
         });
 
@@ -91,6 +89,7 @@ const Candidate = () => {
   }, [selectedStep]);
 
   const handleArrowClick = () => {
+    let flag = true;
     const stepId = selectedUser.steps_id;
     console.log(jobOffers);
     const stepIndex = jobOffers.steps.findIndex((x) => x.id === stepId);
@@ -100,6 +99,8 @@ const Candidate = () => {
     } else {
       return alert("Non ci sono altri step in questa offerta di lavoro");
     }
+
+    const nextStepName = jobOffers.steps[stepIndex + 1].name;
 
     axios
       .put(`http://localhost:8000/api/v1/candidate/nextStep/${selectedUser.id}`, {
@@ -111,14 +112,33 @@ const Candidate = () => {
         setSelectedUser(null);
         const indexCandidateRemove = candidates.findIndex((i) => selectedUser.id === i.id);
         candidates.splice(indexCandidateRemove, 1);
-        // debugger;
+
         // setCandidates(newCandidate);
         console.log(selectedUser);
         alert("Step modificato con successo");
       })
       .catch((error) => {
+        flag = false;
         console.error("There was a problem with the axios request:", error);
       });
+
+    if (flag) {
+      axios
+        .post(`http://localhost:8000/api/v1/event/${selectedUser.id}`, {
+          comment: `Candidato spostato nello step: "${nextStepName}"`,
+          time: new Date(),
+          type: 2,
+          id: selectedUser.id,
+        })
+        .then((response) => {
+          console.log("Response:", response);
+          console.log("Candidatura inviata:", response.data);
+          fetchCall(selectedUser);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
   };
 
   const handleChangeSteps = (step) => {
