@@ -41,7 +41,7 @@ const Login = () => {
         navigate("/joboffer");
       })
       .catch((error) => {
-        console.error("An error occurred during the login process:", error);
+        console.error("Error:", error);
         navigate("/NotFound");
       });
   };

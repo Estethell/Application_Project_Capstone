@@ -17,7 +17,6 @@ const Register = () => {
     password_confirmation: "",
 
     role: "user",
-    cv: null,
   });
 
   const [errors, setErrors] = useState(null);
@@ -46,11 +45,8 @@ const Register = () => {
         body.append("email", formData.email);
         body.append("password", formData.password);
         body.append("password_confirmation", formData.password_confirmation);
-
         body.append("role", "user");
-        if (formData.cv) {
-          body.append("cv", formData.cv);
-        }
+
         return axios.post("/register", body);
       })
       .then(() => axios.get("/api/user"))
@@ -62,7 +58,7 @@ const Register = () => {
         navigate("/joboffer");
       })
       .catch((error) => {
-        console.error("An error occurred during the registration process:", error);
+        console.error("Errore:", error);
         navigate("/NotFound");
       });
   };
@@ -131,10 +127,6 @@ const Register = () => {
             onChange={updateInputValue}
             value={formData.password_confirmation}
           />
-        </label>
-        <label className="my-1">
-          <span>Carica il Curriculum</span>
-          <input type="file" className="form-control" id="cv" name="cv" onChange={updateInputValue} />
         </label>
 
         <button className="submit my-3">Registrati</button>

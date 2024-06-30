@@ -23,7 +23,7 @@ const ClientCandidateList = () => {
         setUserCandidate(candidateJobs);
       })
       .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
+        console.error("Error:", error);
       });
   }, []);
 
@@ -36,7 +36,7 @@ const ClientCandidateList = () => {
         alert("Candidatura eliminata con successo");
       })
       .catch((error) => {
-        console.error("There was a problem with the delete operation:", error);
+        console.error("Error:", error);
       });
   };
 

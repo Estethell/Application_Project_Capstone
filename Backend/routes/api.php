@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\StepController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\JobOfferController;
@@ -33,5 +34,5 @@ Route::name('api.v1.')
     Route::delete('jobOffer/job/{id}', [JobOfferController::class, 'destroy'])->name('jobOffer.destroy'); 
     Route::get('/event/list/{id}', [EventController::class,'index'])->name('event.index'); 
     Route::post('/event/{id}', [EventController::class,'show'])->name('event.show'); 
-
+    
 });

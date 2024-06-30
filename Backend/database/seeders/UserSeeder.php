@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             "email"=> "admin@admin.com",
             "password"=> "adminadmin",
             "role"=> "admin",
-            "cv"=> "",
+            
 
 
         ]);
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             "email"=> "user@user.com",
             "password"=> "useruser",
             "role"=> "user",
-            "cv"=> "",
+            
 
 
         ]);

@@ -22,7 +22,7 @@ const JobForm = () => {
         console.log("data", response.data);
       })
       .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
+        console.error("Error:", error);
       });
   }, []);
 

@@ -13,6 +13,7 @@ const Candidate = () => {
   const [selectedStep, setSelectedStep] = useState(jobOffers.steps[0].id);
   const [isStepSelected, setIsStepSelected] = useState(0);
   const [eventsList, setEventsList] = useState([]);
+
   console.log("selectedUser:", selectedUser);
   console.log("joboffers:", jobOffers);
 
@@ -24,16 +25,20 @@ const Candidate = () => {
   };
 
   const fetchCall = (cand) => {
-    console.log("cand2", cand);
     fetch(`http://localhost:8000/api/v1/event/list/${cand.id}`)
       .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
         return response.json();
       })
       .then((data) => {
-        setEventsList(data);
+        const orderedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        console.log("eventi ordinati:", orderedData);
+        setEventsList(orderedData);
       })
       .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
+        console.error("Error:", error);
       });
   };
 
@@ -56,13 +61,13 @@ const Candidate = () => {
             console.log("data", data);
           })
           .catch((error) => {
-            console.error("There was a problem with the fetch operation:", error);
+            console.error("Error:", error);
           });
         setSelectedUser(null);
         alert("Candidatura eliminata con successo");
       })
       .catch((error) => {
-        console.error("There was a problem with the delete operation:", error);
+        console.error("Error:", error);
       });
   };
 
@@ -84,7 +89,7 @@ const Candidate = () => {
         console.log("data", data);
       })
       .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
+        console.error("Error:", error);
       });
   }, [selectedStep]);
 
@@ -119,7 +124,7 @@ const Candidate = () => {
       })
       .catch((error) => {
         flag = false;
-        console.error("There was a problem with the axios request:", error);
+        console.error("Error:", error);
       });
 
     if (flag) {
@@ -229,7 +234,6 @@ const Candidate = () => {
 
                   <Card.Text>{selectedUser.user.email}</Card.Text>
 
-                  <Card.Link href="#">Link al CV</Card.Link>
                   <hr></hr>
                   <div className="container, d-flex flex-column align-items-center">
                     {eventsList.length > 0 ? (
