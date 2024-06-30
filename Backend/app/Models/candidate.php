@@ -34,6 +34,6 @@ class Candidate extends Model
 
     public function events(): HasMany
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class , 'candidates_id');
     }
 }

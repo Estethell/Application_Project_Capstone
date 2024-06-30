@@ -69,13 +69,17 @@ const Candidate = () => {
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/candidate/list")
       .then((response) => {
+        debugger;
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
         }
         return response.json();
       })
       .then((data) => {
-        let filteredCandidate = data.data.filter((candidate) => candidate.steps_id === selectedStep);
+        let filteredCandidate = data.data.filter((candidate) => {
+          debugger;
+          return candidate.steps_id === selectedStep && candidate.job_offers_id === jobOffers.id;
+        });
 
         setCandidates(filteredCandidate);
 
@@ -104,7 +108,11 @@ const Candidate = () => {
       })
       .then((response) => {
         console.log("data 2", response.data);
-        setSelectedUser(response.data[0]);
+        setSelectedUser(null);
+        const indexCandidateRemove = candidates.findIndex((i) => selectedUser.id === i.id);
+        candidates.splice(indexCandidateRemove, 1);
+        // debugger;
+        // setCandidates(newCandidate);
         console.log(selectedUser);
         alert("Step modificato con successo");
       })

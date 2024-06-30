@@ -91,16 +91,19 @@ class CandidateController extends Controller
      */
     public function destroy($id)
     {
-        
         $candidate = Candidate::find($id);
-
+    
         if (!$candidate) {
             return response()->json(['success' => false, 'message' => 'Candidatura non trovata'], 404);
         }
-
+    
+        
+        $candidate->events()->delete();
+    
         
         $candidate->delete();
-
+    
         return response()->json(['success' => true, 'message' => 'Candidatura eliminata con successo']);
     }
+    
 }

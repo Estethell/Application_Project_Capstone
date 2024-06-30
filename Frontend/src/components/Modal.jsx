@@ -9,8 +9,8 @@ const ModalCandidate = ({ selectedUser, fetchCall }) => {
   const [formData, setFormData] = useState({ comment: "" });
 
   const handleClose = () => {
-    setShow(false); // Chiudi il modale
-    setFormData({ comment: "" }); // Reimposta il valore della textarea a una stringa vuota
+    setShow(false); 
+    setFormData({ comment: "" }); 
   };
 
   const handleShow = () => setShow(true);
@@ -33,7 +33,7 @@ const ModalCandidate = ({ selectedUser, fetchCall }) => {
         console.log("Response:", response);
         console.log("Candidatura inviata:", response.data);
         fetchCall(selectedUser);
-        handleClose(); // Chiudi il modale dopo aver inviato i dati
+        handleClose(); 
       })
       .catch((error) => {
         console.error("Error:", error);

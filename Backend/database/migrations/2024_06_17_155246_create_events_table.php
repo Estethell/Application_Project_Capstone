@@ -16,7 +16,7 @@ return new class extends Migration
             $table->time('time');
             $table->string('type', 20);
             $table->string('description', 200);
-            $table->foreignId('candidates_id')->constrained();
+            $table->foreignId('candidates_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
