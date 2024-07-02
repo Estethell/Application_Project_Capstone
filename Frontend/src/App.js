@@ -3,7 +3,7 @@ import "./App.css";
 import MyNav from "./components/MyNav";
 import JobOffer from "./components/JobOffer";
 import Footer from "./components/Footer";
-
+import { Outlet } from "react-router-dom";
 import Candidate from "./components/Candidate";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import GuestRoutes from "./components/GuestRoutes";
@@ -24,14 +24,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      <MyNav />
-
       <Routes>
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/joboffer" element={<JobOffer />} />
-          <Route path="/candidate" element={<Candidate />}></Route>
-          <Route path="/jobform" element={<JobForm />}></Route>
-          <Route path="/clientJobs" element={<ClientCandidateList />} />
+        <Route element={<ProtectedLayout />}>
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/joboffer" element={<JobOffer />} />
+            <Route path="/candidate" element={<Candidate />} />
+            <Route path="/jobform" element={<JobForm />} />
+            <Route path="/clientJobs" element={<ClientCandidateList />} />
+          </Route>
         </Route>
         <Route element={<GuestRoutes />}>
           <Route path="/" element={<Login />} />
@@ -40,9 +40,18 @@ function App() {
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }
+
+const ProtectedLayout = () => {
+  return (
+    <>
+      <MyNav />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
 
 export default App;

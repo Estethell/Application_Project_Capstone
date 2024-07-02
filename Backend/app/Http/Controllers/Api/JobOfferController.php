@@ -17,10 +17,16 @@ class JobOfferController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $jobOffers = Job_offer::with('steps')->get();
-    return response()->json($jobOffers);
-}
+    {
+        
+        
+    
+       
+        $jobOffers = Job_offer::with('steps')->get();
+    
+        
+        return response()->json($jobOffers);
+    }
 
     /**
      * Show the form for creating a new resource.

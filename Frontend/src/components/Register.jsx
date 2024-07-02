@@ -64,7 +64,7 @@ const Register = () => {
   };
 
   return (
-    <Container className="d-flex flex-column align-items-center">
+    <Container className="d-flex flex-column align-items-center vh-100 justify-content-center ">
       <Form className="form" onSubmit={(ev) => submitLogin(ev)} noValidate>
         <p className="title">Registrati </p>
         <p className="message">Entra nella nostra comunità per cercare l'offerta di lavoro migliore per te! </p>

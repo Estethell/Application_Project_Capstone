@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <Container>
-      <Row className="pt-5">
-        <Col lg={2} md={5} className="flex-column footerCol">
+      <Row className="pt-5 justify-content-around">
+        <Col lg={2} md={5} className="flex-column footerCol ">
           <Link to="/" className="footerLink">
             <p>Informazioni</p>
           </Link>
-          {/* <Link to="/" className="footerLink">
-            <p>Linee guida della community</p>
-          </Link> */}
+
           <Link to="/" className="footerLink">
             <p>
               Privacy e condizioni{" "}
@@ -34,9 +32,6 @@ const Footer = () => {
             {" "}
             <p>Centro sicurezza</p>
           </Link>
-          {/* <Link to="/" className="footerLink">
-            <p>LinkedIn Corporation ©2024</p>
-          </Link> */}
         </Col>
         <Col lg={2} md={5} className="flex-column footerCol">
           <Link to="/" className="footerLink">
@@ -66,7 +61,7 @@ const Footer = () => {
             <p>Piccole imprese</p>
           </Link>
         </Col>
-        <Col lg={3} md={5} className="flex-column footerCol">
+        {/* <Col lg={3} md={5} className="flex-column footerCol">
           <div className="d-flex align-items-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +119,7 @@ const Footer = () => {
               <p>Scopri di più sui contenuti e sull'affidabilità delle offerte lavorative</p>
             </div>
           </div>
-        </Col>
+        </Col> */}
         <Col lg={2} md={5} className="flex-column footerCol">
           <Dropdown>
             <p className="m-0">Seleziona la tua lingua</p>

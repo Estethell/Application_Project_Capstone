@@ -242,3 +242,14 @@
 .stepSvg:hover {
   transform: scale(1.2);
 }
+
+/* css login presentazione */
+.containerLogin {
+  height: 100vh;
+}
+
+.loginInfo {
+  background-image: url("https://images.pexels.com/photos/4050291/pexels-photo-4050291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-position: right;
+}
