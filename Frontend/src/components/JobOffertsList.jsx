@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { LOGIN } from "../redux/actions";
-import { Spinner } from "react-bootstrap";
-import { SET_JOB_OFFERS } from "../redux/actions";
+import { LOGIN, SET_JOB_OFFERS } from "../redux/actions";
+import { Spinner, Button } from "react-bootstrap";
 
 const JobOffersList = () => {
   const [candidates, setCandidates] = useState([]);
   const [jobOffers, setJobOffers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     axios("/api/user")
@@ -27,22 +27,22 @@ const JobOffersList = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (page = 1) => {
       try {
         const candidatesResponse = await axios.get("http://localhost:8000/api/v1/candidate");
         const candidatesData = candidatesResponse.data;
         setCandidates(candidatesData);
 
-        const jobOffersResponse = await axios.get("http://localhost:8000/api/v1/jobOffer");
+        const jobOffersResponse = await axios.get(`http://localhost:8000/api/v1/jobOffer?page=${page}`);
         const jobOffersData = jobOffersResponse.data;
 
-        if (jobOffersData.length > 0 && user) {
+        setJobOffers(jobOffersData.data); // I dati della pagina corrente
+        setTotalPages(jobOffersData.last_page); // Numero totale di pagine
+
+        if (jobOffersData.data.length > 0 && user) {
           const candidateFilter = candidatesData.filter((i) => i.users_id === user?.id);
-
           const jobOffersToExclude = candidateFilter.map((i) => i.job_offers_id);
-
-          const filtered = jobOffersData.filter((jobOffer) => !jobOffersToExclude.includes(jobOffer.id));
-
+          const filtered = jobOffersData.data.filter((jobOffer) => !jobOffersToExclude.includes(jobOffer.id));
           setJobOffers(filtered);
           setLoaded(true);
         }
@@ -51,8 +51,8 @@ const JobOffersList = () => {
       }
     };
 
-    fetchData();
-  }, [user]);
+    fetchData(currentPage);
+  }, [user, currentPage]);
 
   const handleClick = (jobOffer) => {
     if (!user || user.role !== "user") {
@@ -68,10 +68,8 @@ const JobOffersList = () => {
       })
       .then((response) => {
         console.log("Candidatura inviata:", response.data);
-
         const updatedJobOffers = jobOffers.filter((offer) => offer.id !== jobOffer.id);
         setJobOffers(updatedJobOffers);
-
         navigate("/");
       })
       .catch((error) => {
@@ -101,6 +99,10 @@ const JobOffersList = () => {
       });
   };
 
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <>
       {!loaded && (
@@ -122,7 +124,6 @@ const JobOffersList = () => {
                   <button className="card__button m-2" onClick={() => handleClickClientList(jobOffer)}>
                     Visualizza Candidati
                   </button>
-
                   <button className="card__button m-2" onClick={() => handleClickDelete(jobOffer.id)}>
                     Cancella
                   </button>
@@ -132,6 +133,18 @@ const JobOffersList = () => {
           ) : null}
         </div>
       ))}
+      <div className="pagination ms-5">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <Button
+            className="m-1"
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}
+            disabled={currentPage === index + 1}
+          >
+            {index + 1}
+          </Button>
+        ))}
+      </div>
     </>
   );
 };

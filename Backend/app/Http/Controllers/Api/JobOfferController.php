@@ -22,7 +22,7 @@ class JobOfferController extends Controller
         
     
        
-        $jobOffers = Job_offer::with('steps')->get();
+        $jobOffers = Job_offer::with('steps')->paginate(9);
     
         
         return response()->json($jobOffers);
